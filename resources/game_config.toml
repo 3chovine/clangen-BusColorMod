@@ -459,10 +459,10 @@ dev_tools = false
   # Modded configs: ____________________________________________________________________________
   
   # Colorspace(RGB, HEX, or HSV) to display pelt as in cats' profile, default RGB, or "DESC" to print the pelt description from the allegences.
-  display_colorspace = "DESC"
+  display_colorspace = "RGB"
   
   # 1/(chance) that a kit will be multicolor if possible.
-  multi_col_chance = 5
+  multi_col_chance = 3
   
   
   # List that defines options for where mixed-color kit colors will be relative to parent colors.
@@ -471,7 +471,7 @@ dev_tools = false
   # = [0.5]   
   #		for all mixed-color kits to be exactly in between parent colors
   
-  # = [0.1415, M, SD]  where M, SD is replaced with two whole numbers.
+  # = [0.1415, M, SD]  where M, SD is replaced with two decimals.
   #		for kits to pick from a normal distribution with mu of M and standard deviation of SD. [0.1415, 0.5, 0.15] is a good default.
   # There are a ton of normal distribution generators out there to check but I like this one: https://mabognar.github.io/apps/normal.html
   # Do not change 0.1415, it marks the generation type. 
@@ -482,7 +482,7 @@ dev_tools = false
   # Do not change 1224, it marks the generation type. 
 
   
-  inbetween_percent = [0.1415, 0.5, 0.15] 
+  inbetween_percent = [1224, 0, 41, 40]
   
   #Code to check gradient values, change values with !*! and run in empty py file.
   #(Z, A, B, X) = [1224, !A!, !B!, !X!]
