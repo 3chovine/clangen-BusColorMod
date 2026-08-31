@@ -53,6 +53,11 @@ from ..ui.icon import Icon
 from ..ui.windows.leave_clan import LeaveClanWindow
 
 
+from scripts.game_structure import constants # Modded: allows use of game_config values
+import colorsys # Modded: allows conversion betweeen rgb and hsv
+
+
+
 # ---------------------------------------------------------------------------- #
 #               assigns backstory blurbs to the backstory                      #
 # ---------------------------------------------------------------------------- #
