@@ -786,11 +786,35 @@ class ProfileScreen(Screens):
         # NEWLINE ----------
         output += "\n"
 
-        # PELT TYPE
-        output += i18n.t(
-            "screens.profile.pelt_label",
-            pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
-        )
+     # PELT TYPE
+#Modded: prints tint colors instead of pelt, if statement so only multicolor cats get 2 prints,
+        if constants.CONFIG["cat_generation"]["display_colorspace"] == "DESC":
+            pelt_tint = Pelt.describe_appearance(the_cat)
+            if the_cat.pelt.white_patches: white_tint = ''
+            
+        elif constants.CONFIG["cat_generation"]["display_colorspace"] == "HSV":
+            pelt_tint = ["%.2f" % elem for elem in colorsys.rgb_to_hsv(the_cat.pelt.tint[0]/255, the_cat.pelt.tint[1]/255, the_cat.pelt.tint[2]/255)]
+            if the_cat.pelt.white_patches:
+                white_tint = ["%.2f" % elem for elem in colorsys.rgb_to_hsv(the_cat.pelt.white_patches_tint[0]/255, the_cat.pelt.white_patches_tint[1]/255,the_cat.pelt.white_patches_tint[2]/255)]
+        
+        elif constants.CONFIG["cat_generation"]["display_colorspace"] == "HEX":
+            pelt_tint = '#%02x%02x%02x' % (the_cat.pelt.tint[0], the_cat.pelt.tint[1], the_cat.pelt.tint[2])
+            if the_cat.pelt.white_patches: white_tint = '#%02x%02x%02x' % (the_cat.pelt.white_patches_tint[0], the_cat.pelt.white_patches_tint[1], the_cat.pelt.white_patches_tint[2]) 
+        
+        else:
+            pelt_tint = the_cat.pelt.tint
+            if the_cat.pelt.white_patches: white_tint = the_cat.pelt.white_patches_tint
+            
+        if the_cat.pelt.white_patches:
+            output += i18n.t(
+                "screens.profile.pelt_label",
+                pelt=i18n.t(f'{constants.CONFIG["cat_generation"]["display_colorspace"]}: {pelt_tint} {white_tint} {the_cat.pelt.white_patches.lower()}'),
+            )
+        else:
+            output += i18n.t(
+                "screens.profile.pelt_label",
+                pelt=i18n.t(f'{constants.CONFIG["cat_generation"]["display_colorspace"]}: {pelt_tint}'),
+            )
         # NEWLINE ----------
         output += "\n"
 
