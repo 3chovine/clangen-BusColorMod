@@ -19,6 +19,7 @@ Fan-edit creator: SableSteel, and many others
 
 Mod creators: 
 bus-go-honk - initial idea, base concepts, colors
+
 3chovine - most of the coding
 
 ## Downloads
