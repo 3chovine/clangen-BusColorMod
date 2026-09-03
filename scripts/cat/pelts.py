@@ -703,13 +703,14 @@ class Pelt:
         if self.vitiligo == "VITILIGO2":
             self.vitiligo = "VITILIGOTWO"
 
-        # Move white_patches that should be in vit or points.
-        if self.white_patches in Pelt.vitiligo_markings:
-            self.vitiligo = self.white_patches
-            self.white_patches = None
-        elif self.white_patches in Pelt.point_markings:
-            self.points = self.white_patches
-            self.white_patches = None
+# Don't move point/vit white patches
+#         # Move white_patches that should be in vit or points.
+#         if self.white_patches in Pelt.vitiligo_markings:
+#             self.vitiligo = self.white_patches
+#             self.white_patches = None
+#         elif self.white_patches in Pelt.point_markings:
+#             self.points = self.white_patches
+#             self.white_patches = None
 
         if self.tortie_pattern and "tortie" in self.tortie_pattern:
             self.tortie_pattern = sub("tortie", "", self.tortie_pattern.lower())
