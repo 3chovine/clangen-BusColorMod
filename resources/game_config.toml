@@ -461,7 +461,7 @@ dev_tools = false
   # Colorspace(RGB, HEX, or HSV) to display pelt as in cats' profile, default RGB, or "DESC" to print the pelt description from the allegences.
   display_colorspace = "RGB"
   
-  # 1/(chance) that a kit will be multicolor if possible.
+  # 1/(chance) that a kit will be multicolor if possible. Set to 0 to disable multicolored cats, and 1 to guarentee them when possible.
   multi_col_chance = 3
   
   
