@@ -507,7 +507,8 @@ class Pelt:
             print(f'Parent hsv tints:{par_tints}  RGB: {par_rgb}') #print for testing
             
             # 1/chance chance to be multicolor if parent tints are different
-            if (len(par_tints) == 2) and (random.randint(1, constants.CONFIG["cat_generation"]["multi_col_chance"]) == 1):
+            if (len(par_tints) == 2)  and (constants.CONFIG["cat_generation"]["multi_col_chance"] > 0) and (random.randint(1, constants.CONFIG["cat_generation"]["multi_col_chance"]) == 1):
+                # Python evaluates and statements in order so if config is 0 it won't bother with randint and thus not crast from randint(0,0)
                 new_pelt.name = "TwoColour"
                 kit_white_tint = [0,0,0]
                 new_pelt.white_patches = random.choice(Pelt.all_markings)
@@ -644,6 +645,7 @@ class Pelt:
             
         else:         # If no parents, random RGB and no 2ndary color
             kit_white_tint = None
+            new_pelt.white_patches = None
             
             if constants.CONFIG["cat_generation"]["tint_gen_type"] == 1: #Set parentless cats to have completely random color
                 new_pelt.tint = tuple( [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)] )
@@ -1529,8 +1531,10 @@ class Pelt:
 
 def _describe_pattern(cat, short=False):
     #Modded: description color now does tints
-    
-    pelt_name = f"cat.pelts.{cat.pelt.name}{'' if short else '_long'}"
+    if cat.pelt.name in ["Tortie", "Calico"]:
+        pelt_name = "cat.pelts.mottled_long"
+    else:
+        pelt_name = f"cat.pelts.{cat.pelt.name}{'' if short else '_long'}"
     
     # Create list of HSV colors, so an do for loop for color namer
     color_list = [colorsys.rgb_to_hsv(cat.pelt.tint[0]/255, cat.pelt.tint[1]/255, cat.pelt.tint[2]/255)]
