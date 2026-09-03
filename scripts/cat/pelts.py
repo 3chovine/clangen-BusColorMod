@@ -128,6 +128,7 @@ class Pelt:
     for sprite_list in sprites.WHITE_MOSTLY_DATA["sprite_list"]:
         # have to remove FULLWHITE as it's handled special
         mostly_white.extend([x for x in sprite_list if x != "FULLWHITE"])
+        
     vitiligo_markings: list = []
     for sprite_list in sprites.WHITE_VITILIGO_DATA["sprite_list"]:
         vitiligo_markings.extend(sprite_list)
@@ -135,8 +136,8 @@ class Pelt:
     for sprite_list in sprites.WHITE_POINT_DATA["sprite_list"]:
         point_markings.extend(sprite_list)
 
-     #Modded: all markings list
-    all_markings: list = vitiligo_markings + point_markings + tortie_patches + little_white + mid_white + high_white + mostly_white 
+    #Modded: all markings list
+    valid_white_markings: list = little_white + mid_white + high_white + mostly_white 
 
 
     # EYES
@@ -511,7 +512,25 @@ class Pelt:
                 # Python evaluates and statements in order so if config is 0 it won't bother with randint and thus not crast from randint(0,0)
                 new_pelt.name = "TwoColour"
                 kit_white_tint = [0,0,0]
-                new_pelt.white_patches = random.choice(Pelt.all_markings)
+                
+                white_marking = None
+                vit_chance = max(
+                    constants.CONFIG["cat_generation"]["vit_chance"], 0
+                )
+                if not random.getrandbits(vit_chance): # Roll to see if markings are vitiligo style
+                    white_marking = choice(Pelt.vitiligo_markings)
+                else: #If not vit, roll for if point
+                    if not random.getrandbits(
+                        constants.CONFIG["cat_generation"]["random_point_chance"]
+                    ):
+                        white_marking = choice(Pelt.point_markings)
+                        
+                    else: # If neither, half chance to pick white patch and half chance to pick tortie patch
+                        white_marking = random.choice(random.choice([Pelt.valid_white_markings, Pelt.tortie_patches]))
+                
+                
+                
+                new_pelt.white_patches = white_marking
                 
                 # Kit gets both parents' colors, half chance for either orientation
                 if random.randint(1, 2) == 1:
@@ -1531,6 +1550,7 @@ class Pelt:
 
 def _describe_pattern(cat, short=False):
     #Modded: description color now does tints
+    
     if cat.pelt.name in ["Tortie", "Calico"]:
         pelt_name = "cat.pelts.mottled_long"
     else:
@@ -1695,3 +1715,4 @@ def unpack_appearance_ruleset(cat, rule, short, pelt, color):
     else:
         raise Exception(f"Unmatched ruleset item {rule} in describe_appearance!")
     return ""
+
