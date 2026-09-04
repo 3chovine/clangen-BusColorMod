@@ -9,8 +9,10 @@
 ### [Discord Server](https://discord.gg/clangen) || [Official website](https://clangen.io) || [Itch.io Page](https://sablesteel.itch.io/clan-gen-fan-edit) 
 
 ## Description
-Mod of Clangen that makes the cats brightly colored, as well as color inheritance partly inspired by whynotberandom's World of Colors challenge, though maxing out at two colors per cat.
-Several game configs are also added. 
+Mod of Clangen that brings colorful kitties with inheritance to life!! 
+Cats can only gain 2 colors at a time max. For example, a cat can be both red and yellow at the same time but not red, yellow, and blue at the same time.
+Several game configs have also been added to the config file. Search up " # modded configs " in the config file to find them.
+This mod is partly inspired by whynotberandom's World of Colors challenge, make sure to check their challenge out <3.
 
 ## Credits
 Original creator: just-some-cat.tumblr.com
