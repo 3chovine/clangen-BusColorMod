@@ -1576,7 +1576,7 @@ def _describe_pattern(cat, short=False):
         hue_desc = {
             0: "red",
             0.04: "orange",
-            0.10: "yellow",
+            0.12: "yellow",
             0.16: "lime",
             0.20: "green",
             0.40: "mint",
